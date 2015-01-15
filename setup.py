@@ -1,6 +1,11 @@
-#!/usr/bin/python2.7
+#!/usr/bin/env python
 
 from setuptools import setup, find_packages
+
+epdict=dict();
+epdict['nova.hooks']=dict();
+epdict['nova.hooks']['run_instance=pinhead.hooks:PinHeadRunHook']=None
+epdict['nova.hooks']['terminate_instance=pinhead.hooks:PinHeadRunHook']=None
 
 setup(name='pinhead',
 	version='0.1.2',
@@ -8,5 +13,5 @@ setup(name='pinhead',
 	author='Giorgio Franceschi',
 	author_email='g.franceschi@tmg.nl',
 	packages=find_packages(),
-	entry_points={'nova.hooks': {'pinheadrun=pinhead.hooks:PinHeadRunHook'}}
+	entry_points=epdict
 )

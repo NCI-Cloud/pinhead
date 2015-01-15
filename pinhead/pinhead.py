@@ -1,4 +1,4 @@
-#!/usr/bin/python2.7
+#!/usr/bin/env python
 import sys
 import os
 import subprocess
@@ -62,7 +62,8 @@ def pCPUInfo():
 	Doing this via libvirt yields inconsistent results, so we do it by examining the output of lscpu.
 	Different implementations of lscpu might require additional configuration for successful detection of the values. '''
 
-	lscpu = subprocess.check_output(['lscpu'])
+	lscpu_proc = subprocess.Popen('lscpu', stdout=subprocess.PIPE)
+	lscpu = lscpu_proc.communicate()[0]
 
 	for line in lscpu.split("\n"):
 		if line.startswith('CPU(s):'):
